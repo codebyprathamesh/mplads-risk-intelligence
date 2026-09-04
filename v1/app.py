@@ -18,7 +18,7 @@ except Exception:
 # 1. PAGE CONFIGURATION
 # =========================================================
 st.set_page_config(
-    page_title="MPLADS Risk Intelligence System — Audit Ledger",
+    page_title="MPLADS Risk Intelligence System",
     page_icon="M",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -81,9 +81,9 @@ div[data-testid="stStatusWidget"] { display: none !important; }
 
 /* Main Container Layout */
 .block-container {
-    padding-top: 1.5rem !important;
-    padding-bottom: 3.5rem !important;
-    max-width: 1560px !important;
+    padding-top: 2.2rem !important;
+    padding-bottom: 4.5rem !important;
+    max-width: 1480px !important;
 }
 
 /* Headings: Source Serif 4 (Official Gazette / Register Heading) */
@@ -95,8 +95,8 @@ h1, h2, h3, h4, .serif-title, .section-head {
 }
 
 .section-head {
-    font-size: 18px !important;
-    margin: 22px 0 4px 0 !important;
+    font-size: 20px !important;
+    margin: 34px 0 7px 0 !important;
     padding-bottom: 5px;
     border-bottom: 1px solid var(--hairline-light);
     white-space: normal !important;
@@ -235,37 +235,12 @@ div[data-testid="stDataFrame"] th {
     color: var(--ink-primary);
 }
 
-/* Sidebar: Plain Vertical Dossier Index */
-section[data-testid="stSidebar"] {
-    background-color: var(--paper-panel) !important;
-    border-right: 1px solid var(--hairline) !important;
-}
-
-.sidebar-header-box {
-    border-bottom: 1px solid var(--hairline);
-    padding: 8px 4px 12px 4px;
-    margin-bottom: 12px;
-}
-
-.sidebar-title {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--ink-primary);
-}
-
-.sidebar-ref {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px;
-    color: var(--ink-secondary);
-    margin-top: 5px;
-}
-
+/* Sidebar: quiet navigation */
 /* Sidebar Radio Navigation: Robust Item Visibility & Contrast */
 section[data-testid="stSidebar"] [data-testid="stRadio"] > label {
     font-family: 'IBM Plex Mono', monospace !important;
     font-size: 13px !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     color: var(--ink-secondary) !important;
     margin-bottom: 8px !important;
 }
@@ -275,26 +250,12 @@ section[data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] 
     border-top: 1px solid var(--hairline-light);
 }
 
-/* Hide native radio controls across Streamlit DOM variants. */
-section[data-testid="stSidebar"] [data-testid="stRadio"] input[type="radio"],
-section[data-testid="stSidebar"] [data-testid="stRadio"] [role="radio"]::before,
-section[data-testid="stSidebar"] [data-testid="stRadio"] label > div:first-child > div:first-child {
-    display: none !important;
-}
-
-section[data-testid="stSidebar"] [data-testid="stRadio"] label > div:first-child {
-    width: 0 !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
 section[data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] > label {
     background: transparent !important;
     border: none !important;
     border-bottom: 1px solid var(--hairline-light) !important;
     border-radius: 0px !important;
-    padding: 9px 10px !important;
+    padding: 10px 10px !important;
     cursor: pointer !important;
     margin: 0 !important;
     display: flex !important;
@@ -347,47 +308,64 @@ section[data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] 
     vertical-align: middle;
 }
 
-/* Audit Ledger Summary Strip */
+/* Summary cards used across operational pages */
 .ledger-summary-strip {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-    margin-bottom: 22px;
+    gap: 16px;
+    margin: 8px 0 30px 0;
 }
 
 .ledger-cell {
-    padding: 14px 16px;
+    position: relative;
+    padding: 18px 18px 16px 20px;
     border: 1px solid var(--hairline);
     border-radius: 8px;
     background: var(--paper-card);
+    min-height: 122px;
 }
-
 
 .ledger-cell-label {
     display: block;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px;
-    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    font-weight: 650;
     color: var(--ink-secondary);
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
+    line-height: 1.35;
 }
 
 .ledger-cell-val {
     display: block;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
     color: var(--ink-primary);
-    margin-top: 4px;
-    letter-spacing: -0.02em;
+    margin-top: 8px;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
 }
 
 .ledger-cell-sub {
     display: block;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
     color: var(--ink-secondary);
-    margin-top: 3px;
+    margin-top: 8px;
+    line-height: 1.35;
 }
+
+.ledger-cell.tone-critical { border-left: 4px solid var(--risk-critical); }
+.ledger-cell.tone-critical .ledger-cell-val { color: var(--risk-critical); }
+.ledger-cell.tone-high { border-left: 4px solid var(--risk-high); }
+.ledger-cell.tone-high .ledger-cell-val { color: var(--risk-high); }
+.ledger-cell.tone-medium { border-left: 4px solid var(--risk-medium); }
+.ledger-cell.tone-medium .ledger-cell-val { color: var(--risk-medium); }
+.ledger-cell.tone-low { border-left: 4px solid var(--risk-low); }
+.ledger-cell.tone-low .ledger-cell-val { color: var(--risk-low); }
+.ledger-cell.tone-neutral { border-left: 4px solid var(--accent-teal-light); }
+.ledger-cell.tone-neutral .ledger-cell-val { color: var(--accent-teal); }
 
 @media (max-width: 1050px) {
     .ledger-summary-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -397,47 +375,63 @@ section[data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] 
 }
 
 
-/* Dashboard Flash Cards — restrained, editorial, non-template treatment */
+/* Dashboard Flash Cards — quiet hierarchy, minimal ornament */
 .dashboard-cards {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
-    margin: 2px 0 30px 0;
+    margin: 6px 0 40px 0;
 }
 .dashboard-card {
+    position: relative;
     background: var(--paper-card);
     border: 1px solid var(--hairline);
     border-radius: 8px;
-    padding: 18px 20px 18px 20px;
-    min-height: 116px;
+    padding: 20px 22px 18px 22px;
+    min-height: 128px;
     box-sizing: border-box;
 }
-.dashboard-card:hover {
-    border-color: #C8C4BA;
-}
+.dashboard-card:hover { border-color: #C8C4BA; }
+.dashboard-card.tone-neutral { border-left: 4px solid var(--accent-teal-light); }
+.dashboard-card.tone-neutral .dashboard-card-value { color: var(--accent-teal); }
+.dashboard-card.tone-critical { border-left: 4px solid var(--risk-critical); }
+.dashboard-card.tone-critical .dashboard-card-value { color: var(--risk-critical); }
+.dashboard-card.tone-high { border-left: 4px solid var(--risk-high); }
+.dashboard-card.tone-high .dashboard-card-value { color: var(--risk-high); }
+.dashboard-card.tone-medium { border-left: 4px solid var(--risk-medium); }
+.dashboard-card.tone-medium .dashboard-card-value { color: var(--risk-medium); }
 .dashboard-card-kicker {
     font-family: 'Inter', sans-serif;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 650;
     color: var(--ink-secondary);
-    letter-spacing: 0.06em;
+    letter-spacing: 0.055em;
     text-transform: uppercase;
-    margin-bottom: 9px;
+    margin-bottom: 11px;
 }
 .dashboard-card-value {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 30px;
+    font-size: 32px;
     line-height: 1;
     font-weight: 700;
     color: var(--ink-primary);
     letter-spacing: -0.03em;
 }
 .dashboard-card-sub {
-    margin-top: 9px;
+    margin-top: 10px;
     font-family: 'Inter', sans-serif;
     font-size: 12px;
     color: var(--ink-secondary);
-    line-height: 1.35;
+    line-height: 1.4;
+}
+
+/* Plotly content sits on the page itself; section headings provide the hierarchy. */
+div[data-testid="stPlotlyChart"] {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 @media (max-width: 900px) {
     .dashboard-cards { grid-template-columns: 1fr; }
@@ -453,35 +447,6 @@ div[data-testid="stPlotlyChart"] {
 }
 
 /* Sidebar Telemetry Block */
-.sidebar-meta-block {
-    border: 1px solid var(--hairline);
-    background: var(--paper-bg);
-    padding: 12px 14px;
-    margin-top: 16px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px;
-}
-
-.sidebar-meta-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 4px 0;
-    border-bottom: 1px dotted var(--hairline-light);
-}
-
-.sidebar-meta-row:last-child {
-    border-bottom: none;
-}
-
-.sidebar-meta-label {
-    color: var(--ink-secondary);
-    font-weight: 500;
-}
-
-.sidebar-meta-val {
-    color: var(--ink-primary);
-    font-weight: 600;
-}
 
 /* Tables: Hairline borders, sharp 0px corners, no shadows */
 [data-testid="stDataFrame"] {
@@ -750,10 +715,13 @@ div[data-testid="stPlotlyChart"] {
 # =========================================================
 APP_DIR = Path(__file__).resolve().parent
 DATA_PATHS = [
-    APP_DIR / "data" / "MPLAD_cleaned_v2.csv",
+    # Running app.py from the v1/ folder: dataset lives in the repository's data/ folder.
     APP_DIR.parent / "data" / "MPLAD_cleaned_v2.csv",
+    # Also support a self-contained v1/data/ layout and repo-root execution.
+    APP_DIR / "data" / "MPLAD_cleaned_v2.csv",
     APP_DIR / "MPLAD_cleaned_v2.csv",
     Path.cwd() / "data" / "MPLAD_cleaned_v2.csv",
+    Path.cwd() / "MPLAD_cleaned_v2.csv",
     Path("C:/Users/prath/Desktop/workFlow/data/MPLAD_cleaned_v2.csv"),
     Path("C:/Users/prath/Desktop/sih_mplads_risk_frontend_v4/sih_risk_frontend/MPLAD_cleaned_v2.csv"),
 ]
@@ -1034,12 +1002,12 @@ def risk_distribution_chart(counts):
     ))
     fig.update_layout(
         template="plotly_white",
-        height=430,
+        height=395,
         showlegend=False,
         paper_bgcolor=PAPER_BG,
         plot_bgcolor=PLOT_BG,
         font=dict(family="Inter, sans-serif", color=INK_SECONDARY, size=13),
-        margin=dict(l=80, r=95, t=8, b=24),
+        margin=dict(l=88, r=110, t=10, b=28),
         bargap=0.28,
         hoverlabel=dict(bgcolor="#FFFFFF", bordercolor=GRID_COLOR, font=dict(family="IBM Plex Mono", color=INK_PRIMARY, size=13)),
     )
@@ -1055,7 +1023,7 @@ def risk_distribution_chart(counts):
         showgrid=False,
         zeroline=False,
         title=None,
-        tickfont=dict(family="Inter", color=INK_PRIMARY, size=13),
+        tickfont=dict(family="Inter", color=INK_PRIMARY, size=12.5),
         categoryorder="array",
         categoryarray=labels,
     )
@@ -1093,7 +1061,7 @@ def stage_chart(df):
         hovertemplate="<b>%{y}</b><br>Works: %{x:,}<extra></extra>",
     ))
     fig.update_layout(xaxis_title=None, yaxis_title=None)
-    fig = style_fig(fig, height=370)
+    fig = style_fig(fig, height=410)
     fig.update_layout(margin=dict(l=185, r=45, t=15, b=40))
     return fig
 
@@ -1112,7 +1080,7 @@ def category_chart(df):
         hovertemplate="<b>%{y}</b><br>Works: %{x:,}<extra></extra>",
     ))
     fig.update_layout(xaxis_title=None, yaxis_title=None)
-    fig = style_fig(fig, height=370)
+    fig = style_fig(fig, height=410)
     fig.update_layout(margin=dict(l=185, r=45, t=15, b=40))
     return fig
 
@@ -1135,8 +1103,8 @@ def risk_signal_chart(df):
         "High-cost outlier": "High",
         "Possible duplicate": "Medium",
         "Model anomaly flag": "Critical",
-        "Missing description": "No Risk",
-        "Sanction amount missing": "No Risk",
+        "Missing description": "Medium",
+        "Sanction amount missing": "Medium",
     }
 
     fig = px.bar(
@@ -1155,7 +1123,7 @@ def risk_signal_chart(df):
         textfont=dict(family="IBM Plex Mono", color=INK_PRIMARY, size=13),
         hovertemplate="<b>%{y}</b><br>Flagged works: %{x:,}<extra></extra>",
     )
-    fig = style_fig(fig, height=380)
+    fig = style_fig(fig, height=410)
     fig.update_layout(margin=dict(l=195, r=50, t=15, b=40))
     return fig
 
@@ -1232,6 +1200,7 @@ def india_risk_map(df):
     )
 
     # Use Plotly's built-in geographic layer so the dashboard never depends on a Mapbox token.
+    share_max = max(float(g["HighRiskShare"].max()), 1.0)
     fig = px.scatter_geo(
         g,
         lat="lat",
@@ -1241,7 +1210,7 @@ def india_risk_map(df):
         hover_name="State",
         size_max=30,
         projection="mercator",
-        range_color=(0, 100),
+        range_color=(0, share_max),
         color_continuous_scale=[
             [0.00, RISK_COLORS["Low"]],
             [0.35, RISK_COLORS["Medium"]],
@@ -1289,7 +1258,7 @@ def india_risk_map(df):
             font=dict(family="IBM Plex Mono", color=INK_PRIMARY, size=13),
         ),
         coloraxis_colorbar=dict(
-            title="High / critical share",
+            title="High / critical share (%)",
             ticksuffix="%",
             thickness=10,
             len=0.62,
@@ -1361,19 +1330,10 @@ def render_risk_tick_scale(score, tier, reason):
 # =========================================================
 # 8. APPLICATION BOOTSTRAP & SIDEBAR INDEX
 # =========================================================
-st.sidebar.markdown(
-    """
-<div class="sidebar-header-box">
-  <div class="sidebar-title">MPLADS Risk Intelligence System</div>
-</div>
-""",
-    unsafe_allow_html=True,
-)
-
 uploaded = st.sidebar.file_uploader(
-    "Import custom dataset (CSV)",
+    "Import dataset (CSV)",
     type=["csv"],
-    help="Default repository dataset is utilized when omitted.",
+    help="Default repository dataset is used when no upload is provided.",
 )
 df, source = load_data(uploaded)
 
@@ -1385,7 +1345,7 @@ df = prepare_data(df)
 
 # Navigation Index List
 page = st.sidebar.radio(
-    "Register index",
+    "",
     [
         "Dashboard",
         "Risk Signals",
@@ -1438,19 +1398,7 @@ if fy_col:
 if st.sidebar.button("Reset scope filters", width="stretch"):
     st.rerun()
 
-# Sidebar Telemetry Block
 filter_ratio = (len(filtered) / len(df) * 100) if len(df) else 100.0
-st.sidebar.markdown(
-    f"""
-<div class="sidebar-meta-block">
-  <div class="sidebar-meta-row"><span class="sidebar-meta-label">Source file:</span><span class="sidebar-meta-val">{Path(source).name if source else 'Upload'}</span></div>
-  <div class="sidebar-meta-row"><span class="sidebar-meta-label">Total records:</span><span class="sidebar-meta-val">{len(df):,}</span></div>
-  <div class="sidebar-meta-row"><span class="sidebar-meta-label">Active scope:</span><span class="sidebar-meta-val">{len(filtered):,} ({filter_ratio:.1f}%)</span></div>
-  <div class="sidebar-meta-row"><span class="sidebar-meta-label">Surveillance:</span><span class="sidebar-meta-val">Active</span></div>
-</div>
-""",
-    unsafe_allow_html=True,
-)
 
 # Core Aggregates
 risk_counts = filtered["Risk Tier"].value_counts()
@@ -1472,24 +1420,23 @@ utilization = (total_expenditure / total_sanction * 100) if total_sanction > 0 e
 if page == "Dashboard":
     st.markdown("<div class='page-header'><h1 class='page-title'>MPLADS Risk Intelligence System</h1></div>", unsafe_allow_html=True)
 
-    # 2. Portfolio flash cards — three high-value, non-redundant summary metrics
     review_count = high_risk_count
     flag_count = anomaly_count + duplicate_count
     st.markdown(
         f"""
 <div class="dashboard-cards">
-  <div class="dashboard-card">
+  <div class="dashboard-card tone-neutral">
     <div class="dashboard-card-kicker">Total works</div>
     <div class="dashboard-card-value">{len(filtered):,}</div>
     <div class="dashboard-card-sub">{filter_ratio:.1f}% of the registered portfolio is in the active scope.</div>
   </div>
-  <div class="dashboard-card">
+  <div class="dashboard-card tone-critical">
     <div class="dashboard-card-kicker">Priority review</div>
     <div class="dashboard-card-value">{review_count:,}</div>
     <div class="dashboard-card-sub">High or Critical risk tier · {critical_count:,} currently Critical.</div>
   </div>
-  <div class="dashboard-card">
-    <div class="dashboard-card-kicker">Anomaly + duplicate flags</div>
+  <div class="dashboard-card tone-medium">
+    <div class="dashboard-card-kicker">Risk signals</div>
     <div class="dashboard-card-value">{flag_count:,}</div>
     <div class="dashboard-card-sub">{anomaly_count:,} model anomalies + {duplicate_count:,} possible duplicate matches.</div>
   </div>
@@ -1498,10 +1445,9 @@ if page == "Dashboard":
         unsafe_allow_html=True,
     )
 
-    # 3. Detailed charts: geographic workload and risk classification
-    col_map, col_donut = st.columns([1.22, 1.0])
+    col_map, col_risk = st.columns([1.16, 0.94], gap="large")
     with col_map:
-        st.markdown("<div class='section-head'>Geographic exposure map — State workload</div>", unsafe_allow_html=True)
+        st.markdown("<div class='section-head'>Geographic risk exposure</div>", unsafe_allow_html=True)
         if PLOTLY_OK:
             map_fig = india_risk_map(filtered)
             if map_fig is not None:
@@ -1511,40 +1457,37 @@ if page == "Dashboard":
         else:
             st.info("Plotly is required for interactive map visualization.")
 
-    with col_donut:
+    with col_risk:
         st.markdown("<div class='section-head'>Risk classification</div>", unsafe_allow_html=True)
         if PLOTLY_OK:
             st.plotly_chart(risk_distribution_chart(risk_counts), width="stretch", config={"displayModeBar": False})
         else:
             st.bar_chart(risk_counts)
 
-    # 4. Implementation stage & category
-    c_stg, c_cat = st.columns(2)
+    st.markdown("<div class='section-head'>Portfolio composition</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-desc'>Current implementation stage and infrastructure mix across the active scope.</div>", unsafe_allow_html=True)
+    c_stg, c_cat = st.columns(2, gap="large")
     with c_stg:
-        st.markdown("<div class='section-head'>Works by implementation stage</div>", unsafe_allow_html=True)
         if PLOTLY_OK:
             st.plotly_chart(stage_chart(filtered), width="stretch", config={"displayModeBar": False})
         else:
             st.bar_chart(filtered["Work Stage"].fillna("Not Reported").value_counts())
 
     with c_cat:
-        st.markdown("<div class='section-head'>Works by infrastructure category</div>", unsafe_allow_html=True)
         if PLOTLY_OK:
             st.plotly_chart(category_chart(filtered), width="stretch", config={"displayModeBar": False})
         else:
             st.bar_chart(filtered["Display Category"].value_counts())
 
-    # 5. Active regulatory signals
-    st.markdown("<div class='section-head'>Active regulatory signals triggered</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-head'>Active regulatory signals</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-desc'>Counts are colour-coded by the severity of the underlying signal.</div>", unsafe_allow_html=True)
     if PLOTLY_OK:
         st.plotly_chart(risk_signal_chart(filtered), width="stretch", config={"displayModeBar": False})
 
-    # 6. Priority inspection queue
-    st.markdown("<div class='section-head'>Priority audit inspection queue</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-head'>Priority inspection queue</div>", unsafe_allow_html=True)
 
     top_works = filtered.sort_values("Risk Score", ascending=False).head(20).copy()
     top_works.insert(0, "SR NO", range(1, len(top_works) + 1))
-    
     cols_to_show = [c for c in ["SR NO", "Work ID", "State", "Constituency", "MP Name", "Display Category", "Work Stage", "Sanction Amount", "Actual Amount", "Risk Score", "Risk Tier", "Risk Reasons"] if c in top_works.columns]
 
     st.dataframe(
@@ -1580,24 +1523,24 @@ elif page == "Risk Signals":
     st.markdown(
         f"""
 <div class="ledger-summary-strip">
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-critical">
     <span class="ledger-cell-label">High & critical cohort</span>
     <span class="ledger-cell-val" style="color:{RISK_COLORS['Critical']};">{high_risk_count:,}</span>
     <span class="ledger-cell-sub">Requires direct inquiry</span>
   </div>
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-critical">
     <span class="ledger-cell-label">Machine learning anomalies</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{anomaly_count:,}</span>
+    <span class="ledger-cell-val" >{anomaly_count:,}</span>
     <span class="ledger-cell-sub">Isolation Forest flags</span>
   </div>
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-medium">
     <span class="ledger-cell-label">Duplicate text signals</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{duplicate_count:,}</span>
+    <span class="ledger-cell-val" >{duplicate_count:,}</span>
     <span class="ledger-cell-sub">Semantic match cluster</span>
   </div>
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-critical">
     <span class="ledger-cell-label">Completion overdue</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{int(filtered['Completion Overdue'].sum()):,}</span>
+    <span class="ledger-cell-val" >{int(filtered['Completion Overdue'].sum()):,}</span>
     <span class="ledger-cell-sub">Beyond statutory timeline</span>
   </div>
 </div>
@@ -1695,19 +1638,19 @@ elif page == "Anomaly Center":
     st.markdown(
         f"""
 <div class="ledger-summary-strip">
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-critical">
     <span class="ledger-cell-label">Detected statistical anomalies</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{anomaly_count:,}</span>
+    <span class="ledger-cell-val" >{anomaly_count:,}</span>
     <span class="ledger-cell-sub">Multivariate outliers</span>
   </div>
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-medium">
     <span class="ledger-cell-label">Cohort anomaly rate</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{anomaly_rate:.2f}%</span>
+    <span class="ledger-cell-val" >{anomaly_rate:.2f}%</span>
     <span class="ledger-cell-sub">Baseline contamination: 3.0%</span>
   </div>
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-critical">
     <span class="ledger-cell-label">High/critical anomaly overlap</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{high_crit_anomaly:,}</span>
+    <span class="ledger-cell-val" >{high_crit_anomaly:,}</span>
     <span class="ledger-cell-sub">Dual-flagged priority cases</span>
   </div>
 </div>
@@ -1761,24 +1704,24 @@ elif page == "Cost Intelligence":
         st.markdown(
             f"""
 <div class="ledger-summary-strip">
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-neutral">
     <span class="ledger-cell-label">Aggregate sanctioned</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{money(s_vals.sum())}</span>
+    <span class="ledger-cell-val" >{money(s_vals.sum())}</span>
     <span class="ledger-cell-sub">National allocation</span>
   </div>
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-neutral">
     <span class="ledger-cell-label">Median allocation</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{money(p50)}</span>
+    <span class="ledger-cell-val" >{money(p50)}</span>
     <span class="ledger-cell-sub">50th percentile</span>
   </div>
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-medium">
     <span class="ledger-cell-label">95th percentile threshold</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{money(p95)}</span>
+    <span class="ledger-cell-val" >{money(p95)}</span>
     <span class="ledger-cell-sub">Outlier boundary</span>
   </div>
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-critical">
     <span class="ledger-cell-label">Cost overrun works</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{len(overrun_cases):,}</span>
+    <span class="ledger-cell-val" >{len(overrun_cases):,}</span>
     <span class="ledger-cell-sub">Expenditure > sanction</span>
   </div>
 </div>
@@ -1941,24 +1884,24 @@ elif page == "Project Monitoring":
     st.markdown(
         f"""
 <div class="ledger-summary-strip">
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-critical">
     <span class="ledger-cell-label">Completion overdue works</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{int(filtered['Completion Overdue'].sum()):,}</span>
+    <span class="ledger-cell-val" >{int(filtered['Completion Overdue'].sum()):,}</span>
     <span class="ledger-cell-sub">Operating past stipulated date</span>
   </div>
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-medium">
     <span class="ledger-cell-label">Sanction overdue works</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{int(filtered['Sanction Overdue'].sum()):,}</span>
+    <span class="ledger-cell-val" >{int(filtered['Sanction Overdue'].sum()):,}</span>
     <span class="ledger-cell-sub">Pending > 75 days</span>
   </div>
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-low">
     <span class="ledger-cell-label">Completed works</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{completed_count:,}</span>
+    <span class="ledger-cell-val" >{completed_count:,}</span>
     <span class="ledger-cell-sub">Reported finished</span>
   </div>
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-low">
     <span class="ledger-cell-label">Completion rate</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{completion_rate:.1f}%</span>
+    <span class="ledger-cell-val" >{completion_rate:.1f}%</span>
     <span class="ledger-cell-sub">Of active register</span>
   </div>
 </div>
@@ -2105,19 +2048,19 @@ elif page == "Similar Works":
     st.markdown(
         f"""
 <div class="ledger-summary-strip">
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-medium">
     <span class="ledger-cell-label">Flagged duplicate records</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{len(dup_df):,}</span>
+    <span class="ledger-cell-val" >{len(dup_df):,}</span>
     <span class="ledger-cell-sub">Semantic text overlap</span>
   </div>
   <div class="ledger-cell">
     <span class="ledger-cell-label">Distinct MPs affected</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{s_mps:,}</span>
+    <span class="ledger-cell-val" >{s_mps:,}</span>
     <span class="ledger-cell-sub">Parliamentary cohort</span>
   </div>
-  <div class="ledger-cell">
+  <div class="ledger-cell tone-medium">
     <span class="ledger-cell-label">Duplication proportion</span>
-    <span class="ledger-cell-val" style="color:var(--ink-primary);">{(len(dup_df) / len(filtered) * 100) if len(filtered) else 0:.2f}%</span>
+    <span class="ledger-cell-val" >{(len(dup_df) / len(filtered) * 100) if len(filtered) else 0:.2f}%</span>
     <span class="ledger-cell-sub">Of active register</span>
   </div>
 </div>
@@ -2157,8 +2100,4 @@ elif page == "Similar Works":
             unsafe_allow_html=True,
         )
 
-# =========================================================
-# 9. LEDGER FOOTER
-# =========================================================
-st.sidebar.markdown("---")
 
