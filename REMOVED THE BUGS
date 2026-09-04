@@ -1388,14 +1388,8 @@ uploaded = st.sidebar.file_uploader(
 df, source = load_data(uploaded)
 
 if df is None:
-    try:
-        df = pd.read_csv(
-            "https://raw.githubusercontent.com/codebyprathamesh/mplads-risk-intelligence/main/data/MPLAD_cleaned_v2.csv",
-            low_memory=False,
-        )
-        source = "Repository Dataset"
-    except Exception:
-        st.stop()
+    st.error("No dataset available. Verify data/MPLAD_cleaned_v2.csv is placed in the project folder or upload a CSV via the sidebar.")
+    st.stop()
 
 df = prepare_data(df)
 
